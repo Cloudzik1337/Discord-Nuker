@@ -3,6 +3,11 @@ import time
 import os
 import random
 """Bot api for discord bot made by Cloudzikk
+
+ * Educational Purpose Only
+ * Author: [Cloudzik1337]
+ * Date: [20.11.23]
+
 https://github.com/cloudzik1337
 """
 
