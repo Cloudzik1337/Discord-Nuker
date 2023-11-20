@@ -8,6 +8,11 @@ import bot_api
 this code is a mess, but it works so...
 https://github.com/Cloudzik1337
 
+ * Educational Purpose Only
+ * Author: [Cloudzik1337]
+ * Date: [20.11.23]
+
+
 Skids do your best to skid this code :* 
 """
 
