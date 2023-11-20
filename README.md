@@ -1,4 +1,7 @@
 # Cloud Discord Nuker
+ * Educational Purpose Only
+ * Author: [Cloudzik1337]
+ * Date: [20.11.23]
 ![ico](https://raw.githubusercontent.com/Cloudzik1337/Discord-Nuker/main/Showcase/841krdvmenb61-32624139.png)
 ## Preview
 ![showcase](https://raw.githubusercontent.com/Cloudzik1337/Discord-Nuker/main/Showcase/Discord_Az0l3C5TY2.gif)
