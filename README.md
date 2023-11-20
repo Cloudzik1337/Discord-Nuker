@@ -4,6 +4,7 @@
  * Date: [20.11.23]
 ![ico](https://raw.githubusercontent.com/Cloudzik1337/Discord-Nuker/main/Showcase/841krdvmenb61-32624139.png)
 ## Preview
+![image](https://github.com/Cloudzik1337/Discord-Nuker/assets/92876777/53a39ffe-bea1-4e60-a5a1-cfc16b255910)
 ![showcase](https://raw.githubusercontent.com/Cloudzik1337/Discord-Nuker/main/Showcase/Discord_Az0l3C5TY2.gif)
 ## Usage
 1. Download project
