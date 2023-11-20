@@ -7,19 +7,16 @@ import bot_api
 """Actually im terrible in tkinter so
 this code is a mess, but it works so...
 https://github.com/Cloudzik1337
-
  * Educational Purpose Only
  * Author: [Cloudzik1337]
  * Date: [20.11.23]
-
-
 Skids do your best to skid this code :* 
 """
 
 
 
 
-version = "1.0.2"
+version = "1.0.3"
 class DiscordBotControlPanel(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -31,6 +28,8 @@ class DiscordBotControlPanel(ctk.CTk):
         self.configure(bg="#2C2F33")
         self.attributes('-alpha', 0.9)
         self.guilds_frame = None
+        
+        
         # Configure grid layout
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure((2, 3), weight=0)
@@ -39,13 +38,15 @@ class DiscordBotControlPanel(ctk.CTk):
         
         # Create sidebar frame with widgets
         self.sidebar_frame = ctk.CTkFrame(self, width=140, corner_radius=0)
+        # change theme color to red 
+        #ctk.set_default_color_theme("dark-blue") 
         self.sidebar_frame.grid(row=0, column=0, rowspan=4, sticky="nsew")
         self.sidebar_frame.grid_rowconfigure(4, weight=1)
         self.logo_label = ctk.CTkLabel(self.sidebar_frame, text=f"Cloud Nuker {version}", font=ctk.CTkFont(size=20, weight="bold"))
         self.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))
         # Nuke channels checkbox
         self.nuke_channels_var = tk.IntVar()
-        self.nuke_channels_checkbox = ctk.CTkCheckBox(self.sidebar_frame, text="Nuke Channels", variable=self.nuke_channels_var)
+        self.nuke_channels_checkbox = ctk.CTkCheckBox(self.sidebar_frame, text="Nuke Channels", variable=self.nuke_channels_var, fg_color="#E000FF", hover_color="#61106C")
         self.nuke_channels_checkbox.grid(row=1, column=0, padx=20, pady=5, sticky="w")
         # Nuke channels ammount slider
         # text upper slider
@@ -53,18 +54,18 @@ class DiscordBotControlPanel(ctk.CTk):
         self.nuke_channels_ammount_label.grid(row=2, column=0, padx=20, pady=(5, 0), sticky="w")
         # slider
         self.nuke_channels_ammount = tk.IntVar()
-        self.nuke_channels_slider = ctk.CTkSlider(self.sidebar_frame, variable=self.nuke_channels_ammount, from_=1, to=100, orientation=tk.HORIZONTAL)
+        self.nuke_channels_slider = ctk.CTkSlider(self.sidebar_frame, variable=self.nuke_channels_ammount, from_=1, to=100, orientation=tk.HORIZONTAL, button_color="#E000FF", button_hover_color="#61106C", progress_color="#E000FF")
         self.nuke_channels_slider.grid(row=3, column=0, padx=20, pady=1, sticky="ew")
         # Nuke roles checkbox
         self.nuke_roles_var = tk.IntVar()
-        self.nuke_roles_checkbox = ctk.CTkCheckBox(self.sidebar_frame, text="Nuke Roles", variable=self.nuke_roles_var)
+        self.nuke_roles_checkbox = ctk.CTkCheckBox(self.sidebar_frame, text="Nuke Roles", variable=self.nuke_roles_var, fg_color="#E000FF", hover_color="#61106C")
         self.nuke_roles_checkbox.grid(row=4, column=0, padx=20, pady=10, sticky="nw")
         # Nuke roles ammount slider label
         self.nuke_roles_ammount_label = ctk.CTkLabel(self.sidebar_frame, text="Nuke Roles Ammount", font=ctk.CTkFont(size=12, weight="bold"))
         self.nuke_roles_ammount_label.grid(row=5, column=0, padx=20, pady=(5, 0), sticky="nw")
         # Nuke roles ammount slider
         self.nuke_roles_ammount = tk.IntVar()
-        self.nuke_roles_slider = ctk.CTkSlider(self.sidebar_frame, variable=self.nuke_roles_ammount, from_=1, to=100, orientation=tk.HORIZONTAL)
+        self.nuke_roles_slider = ctk.CTkSlider(self.sidebar_frame, variable=self.nuke_roles_ammount, from_=1, to=100, orientation=tk.HORIZONTAL, button_color="#E000FF", button_hover_color="#61106C", progress_color="#E000FF")
         self.nuke_roles_slider.grid(row=6, column=0, padx=20, pady=1, sticky="ew")
         #spam text
         self.spam_text_label = ctk.CTkLabel(self.sidebar_frame, text="Text To spam | <ammount> ", font=ctk.CTkFont(size=12, weight="bold"))
@@ -90,7 +91,7 @@ class DiscordBotControlPanel(ctk.CTk):
         self.token_entry = ctk.CTkEntry(self.log_frame, textvariable=self.Token, width=170)
         self.token_entry.grid(row=7, column=0, padx=20, pady=(5, 0), sticky="s")
         # Start button
-        self.start_button = ctk.CTkButton(self.log_frame, text="Start Bot", command=self.start_bot)
+        self.start_button = ctk.CTkButton(self.log_frame, text="Initialize token", command=self.start_bot, fg_color="#1E8014", hover_color="#214F1C")
         self.start_button.grid(row=7, column=1, padx=5, pady=(5, 0), sticky="s")
 
 
@@ -163,7 +164,7 @@ f"Cloud Nuker {version}"
         while True:
             
             if app.do:
-                print("Bot started with the following options:")
+                 
                 try:
                     api = bot_api.Bot(app.Token.get())
                     got = True
@@ -171,6 +172,8 @@ f"Cloud Nuker {version}"
                     app.insert_log(f"Error: {e}")
                     app.do = False
                 else:
+                    app.start_button.configure(text="Nuke")
+                    app.update()
                     app.insert_log(f"Logged in as: {api.name}")
                     app.insert_log(f"ID: {api.id}")
                     guilds = api.get_guilds().json()
