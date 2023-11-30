@@ -17,7 +17,9 @@ class Bot:
         self.api = "https://discord.com/api/v9"
         self.session = requests.Session()
         self._logged_as()
-     
+    
+
+
 
     def _change_api(self):
         new_api = random.randint(6, 9)
@@ -93,8 +95,8 @@ class Bot:
             name = os.urandom(16).hex()
         return self._post(f"/guilds/{guildid}/channels", data={"name": name, "type": type})
     
-    def spam_channel(self, channelid, content, amount, delay=0.3):
-        for _ in range(amount):
+    def spam_channel(self, channelid, content, ammount, delay=0.3):
+        for _ in range(ammount):
 
             try :self.send_message(channelid, content)
             except:pass
@@ -116,3 +118,21 @@ class Bot:
 
     def create_invite(self, channelid, max_age=0, max_uses=0, temporary=False, unique=False):
         return self._post(f"/channels/{channelid}/invites", data={"max_age": max_age, "max_uses": max_uses, "temporary": temporary, "unique": unique})
+
+    def get_guild_members(self, guildid):
+        return self._get(f"/guilds/{guildid}/members")
+    
+    def ban_member(self, guildid, userid, reason=None, delete_message_days=0):
+        return self._put(f"/guilds/{guildid}/bans/{userid}", data={"reason": reason, "delete_message_days": delete_message_days})
+    
+    def kick_member(self, guildid, userid):
+        return self._delete(f"/guilds/{guildid}/members/{userid}")
+    def create_webhook(self, channelid, name="CloudNuker"):
+        return self._post(f"/channels/{channelid}/webhooks", data={"name": name})
+    def send_message_to_wb(self, webhook_url, content):
+        return requests.post(webhook_url, json={"content": content})
+    def delete_wb(self, url=None, wb_id=None, wb_token=None) -> None:
+        if url is not None:
+            return self._delete(url)
+        return self._delete(f"/webhooks/{wb_id}/{wb_token}")
+            
