@@ -31,7 +31,7 @@ class WebUI:
         port = 5000
         print('URL: http://{}:{}'.format(host, port))
         webbrowser.open('http://{}:{}'.format(host, port))
-        self.app.run(host=host, port=port, debug=False)
+        self.app.run(host=host, port=port, debug=True)
 
 
     def token_get(self):
