@@ -113,11 +113,16 @@ part_2_html = """
 
 """
 def generate_html(names: int):
+    if len(names) == 0:
+        names = ["No Servers Found"]
     if len(names) > 1:
         custom_parts = []
         i = 0
         for name in names:
-            name = name.replace("'", "")
+            try:
+                name = name.replace("'", "")
+            except:
+                pass
             custom_part = f"""
             <!-- Server 2 -->
                     <li class="server-item">
@@ -127,7 +132,11 @@ def generate_html(names: int):
             i += 1
             custom_parts.append(custom_part)
     else:
-        name = name.replace("'", "")
+        name = names[0]
+        try:
+            name = name.replace("'", "")
+        except:
+            name = name
         custom_parts = []
         custom_part = f"""
             <!-- Server 2 -->
