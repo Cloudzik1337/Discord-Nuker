@@ -17,6 +17,7 @@ class WebUI:
     def __init__(self, app):
         self.app: flask.Flask = app
         self.api = None  # Initialize api attribute
+        self.guild_names = []
 
 
     def start(self):
@@ -29,8 +30,9 @@ class WebUI:
         print('Starting WebUI...')
         host = '127.0.0.1'
         port = 5000
-        print('URL: http://{}:{}'.format(host, port))
-        webbrowser.open('http://{}:{}'.format(host, port))
+        combined = host + ":" + port
+        print(f'URL: http://{combined}')
+        webbrowser.open(f'http://{combined}')
         self.app.run(host=host, port=port, debug=False)
 
 
@@ -44,24 +46,22 @@ class WebUI:
             print(f'[+] Received token: {token}')
             api = bot_api.Bot(token)
 
-            guild_names = []
             print("[+] Getting guilds...")
-            guilds = api.get_guilds().json()
-            for guild in guilds:
-                guild_names.append(guild['name'])
+            for guild in api.get_guilds().json():
+                self.guild_names.append(guild['name'])
             print("[+] Generating HTML...")
             gen_html.generate_html(guild_names)
             print("[+] Done!")
             
-            print(f'[+] Logged in as: {api.name}')
+            print(f'[+] Logged in as: {api.user['username']}')
             return flask.redirect('/serverlist')
         except KeyError:
             return flask.redirect('/')
         
     def nuke(self):
         global api
-        print(api.name)
-        return flask.render_template('nuke.html', username=api.name, server = self.managed_guild['name'])
+        print(api.user['username'])
+        return flask.render_template('nuke.html', username=api.user['username'], server = self.managed_guild['name'])
 
     def start_action(self):
         try:

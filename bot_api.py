@@ -13,9 +13,9 @@ class Bot:
     """Backend for discord bot"""
     def __init__(self, token):
         self.token = 'Bot ' + token 
-        # as start we use v9 discord api
         self.api = "https://discord.com/api/v9"
         self.session = requests.Session()
+        self.user = None
         self._logged_as()
     
 
@@ -26,13 +26,14 @@ class Bot:
         self.api = f"https://discord.com/api/v{new_api}"
 
     def _logged_as(self):
-        #log in to bot token 
         r = self._get("/users/@me")
         if r == 401:
             print("Invalid token")
             return
-        self.name = r.json()["username"]
-        self.id = r.json()["id"]
+        self.user = r.json()
+        # Example Usage: 
+        # self.user['username']
+        # self.user['id']
             
 
 
